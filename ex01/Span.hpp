@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/13 15:42:43 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/14 15:31:41 by hgutterr         ###   ########.fr       */
+/*   Created: 2026/07/14 15:36:16 by hgutterr          #+#    #+#             */
+/*   Updated: 2026/07/14 15:41:51 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
 #include <iostream>
-#include <iterator>
 #include <stdexcept>
 
-template <typename T>
-int easyfind( T& cont, int v ) throw( std::invalid_argument )
-{
-	for(typename T::iterator i = cont.begin(); i != cont.end() ; ++i) {
-		if (*i == v) { return (v); }
-	}
-	throw(std::invalid_argument("parameter not found"));
-}
+// template <typename T>
+class Span {
+	private:
+		// T				*_arr;
+		unsigned int	_n;
+	public:
+		Span( void );
+		Span( unsigned int n );
+		Span( const Span& other );
+		Span& operator=( const Span& other );
+		~Span( void );
+};
 
 #endif
