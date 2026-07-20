@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:12 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/19 19:58:25 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/07/20 19:06:02 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ Span::~Span( void )
 	// std::cout << "Span Destructor called." << std::endl;
 }
 
-void	Span::addNumber( int num )
+void	Span::addNumber( int num ) throw(std::out_of_range)
 {
 	if (this->_v.size() >= this->_n)
 		throw (std::out_of_range("span full"));
 	this->_v.push_back(num);
 }
 
-int		Span::shortestSpan()
+int		Span::shortestSpan() throw(Span::noSpanFound)
 {
-	// if(this->_v.size() <= 1)
-		// throw(std::);
+	if(this->_v.size() <= 1)
+		throw(Span::noSpanFound());
 
 	int shortest = *(this->_v.begin());
 
@@ -66,8 +66,11 @@ int		Span::shortestSpan()
 	return (shortest);
 }
 
-int		Span::longestSpan()
+int		Span::longestSpan() throw(Span::noSpanFound)
 {
+	if(this->_v.size() <= 1)
+		throw(Span::noSpanFound());
+
 	int longest = *(this->_v.begin());
 
 	for (std::vector<int>::iterator it = this->_v.begin(); it != this->_v.end(); ++it)
@@ -76,4 +79,8 @@ int		Span::longestSpan()
 			longest = *it;
 	}
 	return (longest);
+}
+
+const char* Span::noSpanFound::what() const throw() {
+	return("no span found");
 }
