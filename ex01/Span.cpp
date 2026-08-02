@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:12 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/20 19:06:02 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/08/02 15:08:36 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,25 @@ Span::~Span( void )
 	// std::cout << "Span Destructor called." << std::endl;
 }
 
-void	Span::addNumber( int num ) throw(std::out_of_range)
+const char* Span::ContainerFullException::what() const throw() {
+	return ("span full");
+}
+
+const char* Span::NotEnoughNumbersException::what() const throw() {
+	return ("not enought numbers");
+}
+
+void	Span::addNumber( int num ) throw (Span::ContainerFullException)
 {
 	if (this->_v.size() >= this->_n)
-		throw (std::out_of_range("span full"));
+		throw (Span::ContainerFullException());
 	this->_v.push_back(num);
 }
 
-int		Span::shortestSpan() throw(Span::noSpanFound)
+int		Span::shortestSpan() throw(Span::NotEnoughNumbersException)
 {
 	if(this->_v.size() <= 1)
-		throw(Span::noSpanFound());
+		throw(Span::NotEnoughNumbersException());
 
 	int shortest = *(this->_v.begin());
 
@@ -66,10 +74,10 @@ int		Span::shortestSpan() throw(Span::noSpanFound)
 	return (shortest);
 }
 
-int		Span::longestSpan() throw(Span::noSpanFound)
+int		Span::longestSpan() throw(Span::NotEnoughNumbersException)
 {
 	if(this->_v.size() <= 1)
-		throw(Span::noSpanFound());
+		throw(Span::NotEnoughNumbersException());
 
 	int longest = *(this->_v.begin());
 
@@ -79,8 +87,4 @@ int		Span::longestSpan() throw(Span::noSpanFound)
 			longest = *it;
 	}
 	return (longest);
-}
-
-const char* Span::noSpanFound::what() const throw() {
-	return("no span found");
 }
