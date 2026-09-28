@@ -6,52 +6,41 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:04 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/20 19:04:30 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/08/02 15:10:37 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
-#include <iostream>
+#include <cstdlib>
+
 
 int main()
 {
+	Span it = Span(5);
 	try
 	{
-		Span it(5);
-		it.addNumber(1);
-		it.addNumber(2);
-		it.addNumber(3);
-		it.addNumber(4);
-		it.addNumber(5);
-
-		std::cout << it.longestSpan() << std::endl;
-		std::cout << it.shortestSpan() << std::endl;
-	}
-	catch( std::exception &e)
-	{
-		std::cout << "exception: " << e.what() << std::endl;
-	}
-	try
-	{
-		Span it(1);
-
-		std::cout << it.longestSpan() << std::endl;
-		std::cout << it.shortestSpan() << std::endl;
-	}
-	catch( std::exception &e)
-	{
-		std::cout << "exception: " << e.what() << std::endl;
-	}
-	try
-	{
-		Span it(100000);
-		for (size_t i = 0; i < 100000; ++i)
+		for (size_t i = 0; i < 5; ++i)
 			it.addNumber(i);
-		std::cout << it.longestSpan() << std::endl;
-		it.addNumber(1);
 	}
-	catch( std::exception &e)
+	catch (std::exception &e)
 	{
-		std::cout << "exception: " << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
+	}
+	try
+	{
+			it.addNumber(10);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	try
+	{
+		std::cout << "shortest : " << it.shortestSpan() << std::endl;
+		std::cout << "longest : " << it.longestSpan() << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
 	}
 }

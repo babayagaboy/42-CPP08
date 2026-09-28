@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:16 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/20 19:05:25 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/08/02 15:08:44 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,20 @@ class Span {
 		Span( const Span& other );
 		Span& operator=( const Span& other );
 		~Span( void );
-
-		class noSpanFound : public std::exception {
-			const char *what() const throw();
+		
+		class ContainerFullException : public std::exception {
+			public:
+				virtual const char *what() const throw();
+		};
+	
+		class NotEnoughNumbersException : public std::exception {
+			public:
+				virtual const char *what() const throw();
 		};
 
-		void	addNumber( int num ) throw(std::out_of_range);
-		int		shortestSpan() throw(Span::noSpanFound);
-		int		longestSpan() throw(Span::noSpanFound);
-
-
+		void	addNumber( int num ) throw(Span::ContainerFullException);
+		int		shortestSpan() throw(Span::NotEnoughNumbersException);
+		int		longestSpan() throw(Span::NotEnoughNumbersException);
 };
 
 #endif

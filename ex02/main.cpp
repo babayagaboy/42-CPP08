@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/20 19:06:20 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/20 19:06:20 by hgutterr         ###   ########.fr       */
+/*   Created: 2026/08/02 16:36:45 by hgutterr          #+#    #+#             */
+/*   Updated: 2026/09/15 14:43:01 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void printRange(Iterator begin, Iterator end)
 int main()
 {
 	MutantStack<int> mstack;
-	assert(mstack.empty());
 
+	assert(mstack.empty());
 	mstack.push(5);
 	mstack.push(17);
 	assert(mstack.top() == 17);
@@ -72,6 +72,7 @@ int main()
 	std::stack<int> standardStack(mstack);
 	assert(standardStack.size() == mstack.size());
 	assert(standardStack.top() == mstack.top());
+
 	std::cout << "All MutantStack checks passed." << std::endl;
 	return 0;
 }
