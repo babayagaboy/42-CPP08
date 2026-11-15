@@ -6,24 +6,26 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 15:42:43 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/07/14 15:31:41 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/11/15 14:53:19 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-#include <iostream>
-#include <iterator>
-#include <stdexcept>
+# include <iostream>
+# include <algorithm>
+# include <iterator>
+# include <stdexcept>
 
 template <typename T>
 int easyfind( T& cont, int v ) throw( std::invalid_argument )
 {
-	for(typename T::iterator i = cont.begin(); i != cont.end() ; ++i) {
-		if (*i == v) { return (v); }
+	if(std::find(cont.begin(), cont.end(), v) != cont.end()) {
+		return (v); 
+	} else {
+		throw(std::invalid_argument("parameter not found"));
 	}
-	throw(std::invalid_argument("parameter not found"));
 }
 
 #endif

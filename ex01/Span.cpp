@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:12 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/11/12 16:23:48 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/11/15 15:11:38 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,40 @@ void	Span::addNumber( int num ) throw (Span::ContainerFullException)
 	this->_v.push_back(num);
 }
 
-int		Span::shortestSpan() throw(Span::NotEnoughNumbersException)
+int Span::shortestSpan() throw(Span::NotEnoughNumbersException)
 {
-	if(this->_v.size() <= 1)
-		throw(Span::NotEnoughNumbersException());
+	if (this->_v.size() < 2)
+		throw Span::NotEnoughNumbersException();
 
-	int shortest = *(this->_v.begin());
+	std::vector<int> tmp = this->_v;
+	std::sort(tmp.begin(), tmp.end());
 
-	for (std::vector<int>::iterator it = this->_v.begin(); it != this->_v.end(); ++it)
+	int shortest = tmp[1] - tmp[0];
+
+	for (size_t i = 1; i < tmp.size() - 1; ++i)
 	{
-		if (*it < shortest)
-			shortest = *it;
+		int diff = tmp[i + 1] - tmp[i];
+		if (diff < shortest)
+			shortest = diff;
 	}
 	return (shortest);
 }
 
-int		Span::longestSpan() throw(Span::NotEnoughNumbersException)
+int Span::longestSpan() throw(Span::NotEnoughNumbersException)
 {
-	if(this->_v.size() <= 1)
-		throw(Span::NotEnoughNumbersException());
+	if (this->_v.size() < 2)
+		throw Span::NotEnoughNumbersException();
 
-	int longest = *(this->_v.begin());
+	int min = *std::min_element(this->_v.begin(), this->_v.end());
+	int max = *std::max_element(this->_v.begin(), this->_v.end());
 
-	for (std::vector<int>::iterator it = this->_v.begin(); it != this->_v.end(); ++it)
-	{
-		if (*it > longest)
-			longest = *it;
+	return (max - min);
+}
+
+void Span::printSpan()
+{
+	for(unsigned int i = 0; i < this->_n; ++i) {
+		std::cout << this->_v[i] << ", ";
 	}
-	return (longest);
+	std::cout << std::endl;
 }

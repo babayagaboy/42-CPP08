@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:16 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/08/02 15:08:44 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/11/15 15:03:18 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdexcept>
 # include <vector>
 # include <iterator>
+# include <algorithm>
 
 class Span {
 	private:
@@ -42,6 +43,7 @@ class Span {
 		void	addNumber( int num ) throw(Span::ContainerFullException);
 		int		shortestSpan() throw(Span::NotEnoughNumbersException);
 		int		longestSpan() throw(Span::NotEnoughNumbersException);
+		void	printSpan();
 };
 
 #endif

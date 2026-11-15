@@ -6,7 +6,7 @@
 /*   By: hgutterr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 15:36:04 by hgutterr          #+#    #+#             */
-/*   Updated: 2026/08/02 15:10:37 by hgutterr         ###   ########.fr       */
+/*   Updated: 2026/11/15 15:06:23 by hgutterr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int main()
 	Span it = Span(5);
 	try
 	{
-		for (size_t i = 0; i < 5; ++i)
-			it.addNumber(i);
+		int n = 1;
+		for (int i = 0; i < 5; ++i) {
+			it.addNumber(n);
+			n *= 2;
+		}
 	}
 	catch (std::exception &e)
 	{
@@ -36,6 +39,7 @@ int main()
 	}
 	try
 	{
+		it.printSpan();
 		std::cout << "shortest : " << it.shortestSpan() << std::endl;
 		std::cout << "longest : " << it.longestSpan() << std::endl;
 	}
